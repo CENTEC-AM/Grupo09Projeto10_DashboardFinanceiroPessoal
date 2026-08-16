@@ -1,0 +1,47 @@
+
+/* Importando a fonte poppins do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+/*  Aplicando a nova fonte a todo o corpo do documento */
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+/*  Efeito de transição suave nos botões */
+.btn-primary {
+    transition: all 0.3s ease; /* Faz a animação */
+}
+
+/* O que acontece quando o mouse passa por cima do botão principal */
+.btn-primary:hover {
+    transform: translateY(-2px); /* Levanta o botão levemente */
+    box-shadow: 0 4px 8px rgba(13, 110, 253, 0.3); /* Adiciona uma sombra azulada */
+}
+
+/* Efeito de foco nos itens da lista de histórico */
+.list-group-item {
+    transition: background-color 0.2s ease;
+}
+
+.list-group-item:hover {
+    background-color: #f1f3f5; /* Fica levemente cinza ao passar o mouse */
+    cursor: default;
+}
+
+/* Customizando a barra de rolagem da página inteira */
+::-webkit-scrollbar {
+    width: 8px; /* Afina a barra */
+}
+
+::-webkit-scrollbar-track {
+    background: #f8f9fa; /* Cor de fundo da trilha */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #adb5bd; /* Cor da barrinha que se move */
+    border-radius: 4px; /* Deixa as pontas arredondadas */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #6c757d; /* Escurece a barra quando o mouse passa nela */
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Dashboard Financeiro</title>
+
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-light">
+
+    <header class="bg-primary text-white text-center py-4 mb-4">
+        <h1>Controle Financeiro Pessoal</h1>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="container">
+        
+        <!-- Seção de Saldo -->
+        <section class="row mb-4 text-center">
+            <div class="col">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h2>Saldo Atual</h2>
+                        <h3 id="visor-saldo" class="text-success">R$ 0,00</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Filtros e Pesquisa -->
+        <section class="row mb-4">
+            <div class="col">
+                <input type="text" id="pesquisa" class="form-control" placeholder="Pesquisar transação...">
+            </div>
+        </section>
+
+        <div class="row">
+            <!-- Formulário de Lançamento -->
+            <section class="col-md-6 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <form id="form-transacao">
+                            <fieldset>
+                                <legend class="h5">Novo Lançamento</legend>
+
+                                <div class="mb-3">
+                                    <label for="descricao" class="form-label">Descrição da Conta:</label>
+                                    <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Ex: Conta de Luz" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="valor" class="form-label">Valor (R$):</label>
+                                    <input type="number" class="form-control" id="valor" name="valor" step="0.01" placeholder="Ex: 150.00" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Tipo de Transação:</label><br>
+
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="tipo-transacao" id="tipo-receita" value="receita" required>
+                                        <label class="form-check-label" for="tipo-receita">Receita (+)</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="tipo-transacao" id="tipo-despesa" value="despesa" required>
+                                        <label class="form-check-label" for="tipo-despesa">Despesa (-)</label>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary w-100">Adicionar Lançamento</button>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Histórico -->
+            <section class="col-md-6 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h2 class="h5">Histórico de Transações</h2>
+                        <ul id="lista-historico" class="list-group list-group-flush mt-3">
+                            <li class="list-group-item text-muted">Nenhuma transação ainda...</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="text-center py-3 mt-4 border-top">
+        <p>&copy; 2026 Meu Dashboard Financeiro.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
