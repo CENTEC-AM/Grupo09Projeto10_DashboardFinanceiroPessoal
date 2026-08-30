@@ -1,3 +1,6 @@
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
     const ctx = document.getElementById('graficoDespesasEstatico').getContext('2d');
 
@@ -39,3 +42,100 @@ document.addEventListener('DOMContentLoaded', function() {
 
     new Chart(ctx, configuracao);
 });
+// HISTÓRICO DE TRANSAÇÕES PARA RECEITA E DESPESA
+
+const formulario = document.getElementById("form-transacao");
+const listaHistorico = document.getElementById("lista-historico");
+
+let transacoes = JSON.parse(localStorage.getItem("transacoes")) || [];
+
+formulario.addEventListener("submit", function(event) {
+    
+
+    event.preventDefault();
+
+    const descricao = document.getElementById("descricao").value;
+    const valor = parseFloat(document.getElementById("valor").value);
+
+    const tipo = document.querySelector(
+        'input[name="tipo-transacao"]:checked'
+     );
+
+    if (descricao === "" || isNaN(valor) || !tipo) {
+        alert("Preencha todos os campos!");
+        return;
+     }
+
+    const transacao = {
+        descricao: descricao,
+        valor: valor,
+        tipo: tipo.value
+       };
+
+    transacoes.push(transacao);
+
+    localStorage.setItem(
+        "transacoes",
+        JSON.stringify(transacoes)
+      );
+
+    mostrarHistorico();
+    atualizarSaldo();
+
+    formulario.reset();
+    });
+
+
+function mostrarHistorico() {
+
+    listaHistorico.innerHTML = "";
+
+    if (transacoes.length === 0) {
+
+        listaHistorico.innerHTML = `
+            <li class="list-group-item text-muted">
+                Nenhuma transação ainda...
+            </li>
+        `;
+
+        return;
+       }
+
+    transacoes.forEach(function(transacao) {
+
+        const item = document.createElement("li");
+
+        item.className =
+            "list-group-item d-flex justify-content-between";
+
+        const sinal =
+            transacao.tipo === "receita" ? "+" : "-";
+
+        item.innerHTML = `
+            <span>${transacao.descricao}</span>
+            <strong>
+                ${sinal} R$ ${transacao.valor.toFixed(2)}
+            </strong>
+        `;
+
+        listaHistorico.appendChild(item);
+         });
+   }
+
+mostrarHistorico();
+function atualizarSaldo() {
+    let saldo = 0;
+
+    transacoes.forEach(function(transacao) {
+        if (transacao.tipo === "receita") {
+            saldo += transacao.valor;
+        } else {
+            saldo -= transacao.valor;
+        }
+    });
+
+    document.getElementById("visor-saldo") .textContent =
+        "R$ " + saldo.toFixed(2).replace(".", ",");
+}
+
+atualizarSaldo();
