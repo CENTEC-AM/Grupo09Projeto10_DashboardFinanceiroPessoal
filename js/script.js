@@ -102,7 +102,7 @@ function mostrarHistorico() {
        }
 
     transacoes.forEach(function(transacao) {
-
+        // calculo
         const item = document.createElement("li");
 
         item.className =
