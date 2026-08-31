@@ -44,3 +44,12 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: #6c757d; /* Escurece a barra quando o mouse passa nela */
 }
+/* Aplicando degradê */
+fieldset{
+    background-image: linear-gradient(to bottom, #cccccc, #ffffff);
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+}
+#Historico{
+      background-image: linear-gradient(to bottom, #cccccc, #ffffff);
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+}
