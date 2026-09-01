@@ -100,11 +100,15 @@ function mostrarHistorico() {
 
         return;
        }
+       const transacoesOrdenadas = [...transacoes].sort((a, b) => {
+    if (a.tipo === "receita" && b.tipo !== "receita") return -1;
+    if (a.tipo !== "receita" && b.tipo === "receita") return 1;
+    return 0;
+});
 
-    transacoes.forEach(function(transacao) {
-        // calculo aut.
-        const item = document.createElement("li");
-
+transacoesOrdenadas.forEach(function(transacao) {
+    // cálculo...
+    const item = document.createElement("li");
         item.className =
             "list-group-item d-flex justify-content-between";
 
