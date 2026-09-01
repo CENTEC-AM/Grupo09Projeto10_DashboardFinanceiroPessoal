@@ -102,7 +102,7 @@ function mostrarHistorico() {
        }
 
     transacoes.forEach(function(transacao) {
-        // calculo
+        // calculo aut.
         const item = document.createElement("li");
 
         item.className =
@@ -134,8 +134,18 @@ function atualizarSaldo() {
         }
     });
 
-    document.getElementById("visor-saldo") .textContent =
+    let visorSaldo = document.getElementById("visor-saldo");
+
+    visorSaldo.textContent =
         "R$ " + saldo.toFixed(2).replace(".", ",");
+
+    if (saldo < 0) {
+        visorSaldo.classList.remove("text-success");
+        visorSaldo.classList.add("text-danger");
+    } else {
+        visorSaldo.classList.remove("text-danger");
+        visorSaldo.classList.add("text-success");
+    }
 }
 
 atualizarSaldo();
