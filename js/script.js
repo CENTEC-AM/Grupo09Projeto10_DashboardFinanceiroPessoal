@@ -46,6 +46,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 const formulario = document.getElementById("form-transacao");
 const listaHistorico = document.getElementById("lista-historico");
+const filtroTransacoes = document.getElementById("filtro-transacoes");
+   
+filtroTransacoes.addEventListener("change", function() {
+    mostrarHistorico();
+});
 
 let transacoes = JSON.parse(localStorage.getItem("transacoes")) || [];
 
@@ -90,7 +95,27 @@ function mostrarHistorico() {
 
     listaHistorico.innerHTML = "";
 
-    if (transacoes.length === 0) {
+    const filtro = filtroTransacoes.value;
+
+    let transacoesParaMostrar = transacoes;
+
+    if (filtro === "receita") {
+
+    transacoesParaMostrar = transacoes.filter(function(transacao) {
+        return transacao.tipo === "receita";
+    });
+
+    }
+
+    if (filtro === "despesa") {
+
+    transacoesParaMostrar = transacoes.filter(function(transacao) {
+        return transacao.tipo === "despesa";
+    });
+
+    }
+
+    if (transacoesParaMostrar.length === 0) {
 
         listaHistorico.innerHTML = `
             <li class="list-group-item text-muted">
@@ -100,7 +125,7 @@ function mostrarHistorico() {
 
         return;
        }
-       const transacoesOrdenadas = [...transacoes].sort((a, b) => {
+       const transacoesOrdenadas = [...transacoesParaMostrar].sort((a, b) => {
     if (a.tipo === "receita" && b.tipo !== "receita") return -1;
     if (a.tipo !== "receita" && b.tipo === "receita") return 1;
     return 0;
